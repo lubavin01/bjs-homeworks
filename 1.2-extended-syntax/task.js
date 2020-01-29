@@ -6,13 +6,24 @@ function calculateQuadraticEquation(){
     let c = +window.c.value;
     let result = getResult(a,b,c);
     window.equation.textContent = `${a}*x^2 + (${b})*x + (${c}) = 0`;
-    let span = window.result;
-    span.textContent = "х = "+result;
+    // let span = window.result;
+    // span.textContent = "х = "+result;
+    window.res.textContent = 'х = '+result;
 }
 
 function getResult(a,b,c){
-    // код для задачи №1 писать здесь
-    //return x;
+    D = Math.sqrt(b*b - 4 * a * c);
+
+    result = [];
+
+    if (D > 0) {
+      result.push((-b + D)/(2*a));
+      result.push((-b - D)/(2*a));
+    } else if (D === 0) {
+      result.push(-b/(2*a));
+    }
+
+    return result;
 }
 
 function calculateAverageRating(){
@@ -22,8 +33,23 @@ function calculateAverageRating(){
 }
 
 function getAverageMark(marks){
-    // код для задачи №2 писать здесь
-    //return averageMark;
+  let maximum = 5;
+
+  if (marks.length === 0) {
+    return 0;
+  }
+
+  if (marks.length > maximum) {
+    console.log(`Больше ${maximum} оценок`);
+    marks.splice(maximum);
+  }
+
+  let sum = 0;
+  for (let i = 0; i < marks.length; i++) {
+    sum+=marks[i];
+  }
+
+  return sum/marks.length;
 }
 
 function calculateDrinkTask(){
@@ -34,7 +60,13 @@ function calculateDrinkTask(){
 }
 
 function askDrink(name,dateOfBirthday){
-    // код для задачи №3 писать здесь
-    //console.log(result)
-    //return result;
+  let currentDate = new Date();
+  if (currentDate.getFullYear() - dateOfBirthday.getFullYear() < 18) {
+    result = `Сожалею, ${name}, но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!`;
+  } else {
+    result = `Не желаете ли олд-фэшн, ${name}?`;
+  }
+
+  return result;
+
 }
