@@ -105,6 +105,24 @@ class Staff extends Weapon {
   }
 }
 
+class Axe extends Weapon {
+  constructor() {
+    super('Секира', 27, 800, 1);
+  }
+}
+
+class StaffStorm extends Weapon {
+  constructor() {
+    super('Посох бури', 10, 300, 3);
+  }
+}
+
+class LongBow extends Weapon {
+  constructor() {
+    super('Длинный лук', 15, 200, 4);
+  }
+}
+
 console.log(new Bow());
 console.log(new Bow().takeDamage(20));
 console.log(new Bow().getDamage());
@@ -114,10 +132,16 @@ console.log(new Arm());
 console.log(new Knife());
 console.log(new Staff());
 
+console.log(new LongBow());
+console.log(new Axe());
+console.log(new StaffStorm());
+
 // ============= task 3 ============
 class StudentLog {
   constructor(name) {
     this.name = name;
+
+    this.subjects = [];
   }
 
   getName() {
@@ -126,7 +150,7 @@ class StudentLog {
 
   addGrade(grade, subject) {
 
-    if (this[subject] == undefined) {
+    if (this[subject] === undefined) {
       this[subject] = [];
     }
 
@@ -135,6 +159,10 @@ class StudentLog {
       console.log(`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`);
     }  else  {
       this[subject].push(parsedGrade);
+
+      if (!this.subjects.find(item => item === subject)) {
+        this.subjects.push(subject);
+      }
     }
 
     return this[subject].length;
@@ -148,6 +176,23 @@ class StudentLog {
     const sum = this[subject].reduce((acc, elem)=>acc + elem, 0);
     return sum / this[subject].length;
   }
+
+  getTotalAverage() {
+    let sum = 0;
+    let totalLength = 0;
+
+    this.subjects.forEach((subject, i) => {
+      sum += this[subject].reduce((acc, item)=> acc + item, 0);
+
+      totalLength += this[subject].length;
+    });
+
+    if (!totalLength) {
+      return 0 ;
+    }
+
+    return sum/totalLength;
+  }
 }
 
 const olegLog = new StudentLog('Олег Никифоров');
@@ -160,6 +205,8 @@ console.log(olegLog.addGrade(6, 'math'));
 console.log(olegLog.addGrade('0', 'algebra'));
 console.log(olegLog.addGrade('abc', 'algebra'));
 
+console.log(`getTotalAverage 1 ${olegLog.getTotalAverage()}`);
+
 console.log(olegLog.addGrade(3, 'algebra'));
 console.log(olegLog.addGrade(4, 'algebra'));
 console.log(olegLog.addGrade(5, 'algebra'));
@@ -170,3 +217,6 @@ console.log(olegLog.addGrade(5, 'geometry'));
 console.log(`geometry ${olegLog.getAverageBySubject('geometry')}`);
 console.log(`algebra ${olegLog.getAverageBySubject('algebra')}`);
 console.log(`math ${olegLog.getAverageBySubject('math')}`);
+console.log(`math ${olegLog.getAverageBySubject('russian')}`);
+
+console.log(`getTotalAverage 2 ${olegLog.getTotalAverage()}`);
