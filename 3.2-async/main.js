@@ -76,12 +76,14 @@ class AlarmClock {
   }
 }
 
-let myAlarm = new AlarmClock();
-myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 1000*60)), myAlarm.ring, 1);
-myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 2000*60)), () => {console.log('Time to sleep #2'); myAlarm.removeClock(2)}, 2);
-myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 2000*60)), () => {console.log('Go wash #?')} );
-myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 3000*60)), () => {console.log('Time to sleep #2'); myAlarm.removeClock(2)}, 2);
-myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 5000*60)), () => {console.log('ring ring #3'); myAlarm.clearAlarms(); myAlarm.printAlarms()}, 3);
-myAlarm.start();
-
-myAlarm.printAlarms();
+function testCase() {
+  let myAlarm = new AlarmClock();
+  myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 1000*60)), myAlarm.ring, 1);
+  myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 2000*60)), () => {console.log('Time to sleep #2'); myAlarm.removeClock(2)}, 2);
+  myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 2000*60)), () => {console.log('Go wash #?')} );
+  myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 3000*60)), () => {console.log('Time to sleep #2'); myAlarm.removeClock(2)}, 2);
+  myAlarm.addClock(AlarmClock.formattedDate(new Date(Date.now() + 5000*60)), () => {console.log('ring ring #3'); myAlarm.clearAlarms(); myAlarm.printAlarms()}, 3);
+  myAlarm.start();
+    
+  myAlarm.printAlarms();
+}
